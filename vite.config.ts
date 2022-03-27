@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import { resolve } from 'path'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
+import vueI18n from '@intlify/vite-plugin-vue-i18n'
 
 export default defineConfig({
   plugins: [
@@ -14,7 +14,7 @@ export default defineConfig({
       sassVariables: 'src/quasar-variables.sass'
     }),
 
-    VueI18n({
+    vueI18n({
       include: resolve(__dirname, './src/locales/**')
     })
   ],

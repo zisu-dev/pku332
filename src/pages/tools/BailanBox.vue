@@ -8,14 +8,20 @@
           </q-card-section>
           <q-separator />
           <q-card-section>
-            <div class="row q-col-gutter-md">
-              <div class="col-4" v-for="item in items">
+            <div class="row q-col-gutter-md justify-center">
+              <div
+                class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1"
+                v-for="item in items"
+              >
                 <q-card
                   v-ripple
                   class="cursor-pointer q-hoverable"
                   @click="open(item)"
                 >
                   <q-card-section>
+                    <div class="row justify-center">
+                      <img height="64" width="64" :src="item.icon" />
+                    </div>
                     <div class="text-h6 text-center">{{ t(item.name) }}</div>
                   </q-card-section>
                 </q-card>
@@ -32,12 +38,39 @@
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
-const items = [
-  { name: 'bilibili', href: 'https://bilibili.com/' },
-  { name: 'PUBG', href: '' }
+
+interface BailanItem {
+  name: string
+  href?: string
+  icon?: string
+}
+
+const items: BailanItem[] = [
+  {
+    name: 'bilibili',
+    href: 'https://bilibili.com/',
+    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/bilibili.svg'
+  },
+  {
+    name: 'pubg',
+    href: 'steam://rungameid/578080',
+    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/pubg.svg'
+  },
+  {
+    name: 'pixiv',
+    href: 'https://www.pixiv.net',
+    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/pixiv.svg'
+  },
+  {
+    name: 'steam',
+    href: 'https://store.steampowered.com/',
+    icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/steam.svg'
+  }
 ]
 
-function open(item: any) {
-  //
+function open(item: BailanItem) {
+  if (item.href) {
+    window.open(item.href, '_blank')
+  }
 }
 </script>

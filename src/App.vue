@@ -77,15 +77,3 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 </script>
-
-<i18n lang="yaml">
-en-US:
-  en-US: English (United States)
-  zh-CN: Chinese
-  home: Home
-
-zh-CN:
-  en-US: 英语（美国）
-  zh-CN: 简体中文
-  home: 主页
-</i18n>
