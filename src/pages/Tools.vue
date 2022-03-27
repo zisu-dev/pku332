@@ -8,11 +8,14 @@
           </q-card-section>
           <q-separator />
           <q-card-section>
-            <div class="row q-col-gutter-md">
-              <div class="col-4" v-for="item in tools">
+            <div class="row q-col-gutter-md items-stretch">
+              <div
+                class="col-6 col-sm-4 col-md-3 col-lg-2"
+                v-for="item in tools"
+              >
                 <q-card
                   v-ripple
-                  class="cursor-pointer q-hoverable"
+                  class="cursor-pointer q-hoverable full-height"
                   @click="router.push(`/tools/${item.name}`)"
                 >
                   <q-card-section>
@@ -39,6 +42,10 @@ const tools = [
   {
     name: 'bailanbox',
     icon: '🤗'
+  },
+  {
+    name: 'wheretoeat',
+    icon: '🤤'
   }
 ]
 </script>

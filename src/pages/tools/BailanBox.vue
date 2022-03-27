@@ -8,14 +8,14 @@
           </q-card-section>
           <q-separator />
           <q-card-section>
-            <div class="row q-col-gutter-md justify-center">
+            <div class="row q-col-gutter-md justify-center items-stretch">
               <div
-                class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1"
+                class="col-6 col-sm-4 col-md-3 col-lg-2 z-blitem"
                 v-for="item in items"
               >
                 <q-card
                   v-ripple
-                  class="cursor-pointer q-hoverable"
+                  class="cursor-pointer q-hoverable full-height"
                   @click="open(item)"
                 >
                   <q-card-section>
@@ -65,6 +65,16 @@ const items: BailanItem[] = [
     name: 'steam',
     href: 'https://store.steampowered.com/',
     icon: 'https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/steam.svg'
+  },
+  {
+    name: 'netease-cloudmusic',
+    href: 'https://music.163.com',
+    icon: 'https://s2.loli.net/2022/03/27/tOf6MLNriejFlCR.png'
+  },
+  {
+    name: 'pkuhole',
+    href: 'https://pkuhelper.pku.edu.cn/hole',
+    icon: 'https://pkuhelper.pku.edu.cn/hole/static/favicon/256.png'
   }
 ]
 
@@ -74,3 +84,9 @@ function open(item: BailanItem) {
   }
 }
 </script>
+
+<style>
+.z-blitem {
+  max-width: 220px !important;
+}
+</style>

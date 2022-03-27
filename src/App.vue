@@ -3,7 +3,7 @@
     <q-header elevated class="bg-pku text-white">
       <q-toolbar>
         <q-btn dense flat round icon="mdi-menu" @click="toggleLeftDrawer" />
-        <q-toolbar-title>PKU332</q-toolbar-title>
+        <q-toolbar-title style="overflow: visible">PKU332</q-toolbar-title>
         <q-space />
         <q-select
           v-model="locale"
@@ -48,7 +48,11 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="router" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
@@ -77,3 +81,15 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 </script>
+
+<style>
+.router-enter-active,
+.router-leave-active {
+  transition: opacity 0.1s ease;
+}
+
+.router-enter-from,
+.router-leave-to {
+  opacity: 0;
+}
+</style>
