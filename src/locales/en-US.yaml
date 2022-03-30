@@ -1,7 +1,11 @@
+# Language selector
 en-US: English (United States)
 zh-CN: Chinese
+# Main nav
 tools: Tools
 home: Home
+pubgnote: PUBG note
+
 bailanbox: BaiLan Box
 pubg: PUBG
 bilibili: BiliBili
@@ -11,3 +15,6 @@ netease-cloudmusic: Netease Cloudmusic
 pkuhole: PKU Hole
 wheretoeat: Where to Eat
 tellme: Tell me!
+
+goto: goto
+play now: Play now!

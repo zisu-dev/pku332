@@ -14,10 +14,13 @@ const router = createRouter({
       name: 'tools',
       component: () => import('@/pages/Tools.vue')
     },
+    {
+      path: '/pubgnote',
+      name: 'pubgnote',
+      component: () => import('@/pages/PUBGNote.vue')
+    },
     ...tools
   ]
 })
 
 export default router
-
-console.log(tools)

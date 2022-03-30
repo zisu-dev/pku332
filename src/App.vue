@@ -74,7 +74,12 @@ const localeOptions = computed(() =>
 )
 const navItems = [
   { to: '/', label: 'home', icon: 'mdi-home' },
-  { to: '/tools', label: 'tools', icon: 'mdi-toolbox' }
+  { to: '/tools', label: 'tools', icon: 'mdi-toolbox' },
+  {
+    to: '/pubgnote',
+    label: 'pubgnote',
+    icon: 'img:https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/pubg.svg'
+  }
 ]
 const leftDrawerOpen = ref(false)
 function toggleLeftDrawer() {
