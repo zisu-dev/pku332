@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'pubgnote',
       component: () => import('@/pages/PUBGNote.vue')
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('@/pages/Admin.vue')
+    },
     ...tools
   ]
 })

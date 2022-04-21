@@ -3,20 +3,32 @@ import { computed } from 'vue'
 
 const BASE = <string>import.meta.env.VITE_API_BASE
 
-const adminToken = useLocalStorage('adminToken', '')
-export const isAdmin = computed(() => !!adminToken.value)
-
-async function AdminCall(method: string, path: string, data?: any) {
-  if (!adminToken.value) throw new Error('Not logged in')
+export async function call(
+  token: string,
+  method: string,
+  path: string,
+  data?: any
+) {
   const res = await fetch(`${BASE}${path}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `${adminToken.value}`
+      Authorization: token
     },
     body: JSON.stringify(data)
   })
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`)
+  }
   return res.json()
+}
+
+const adminToken = useLocalStorage('adminToken', '')
+export const isAdmin = computed(() => !!adminToken.value)
+
+async function adminCall(method: string, path: string, data?: any) {
+  if (!adminToken.value) throw new Error('Not logged in')
+  return call(adminToken.value, method, path, data)
 }
 
 export function adminLogin(token: string) {
@@ -28,38 +40,30 @@ export function adminAction(
   node: string,
   args: Record<string, any>
 ) {
-  return AdminCall('POST', `/admin/${action}`, { node, ...args })
+  return adminCall('POST', `/admin/${action}`, { node, ...args })
 }
 
 export async function generateToken(comment: string) {
-  const res = await AdminCall('POST', '/admin/token', { comment })
-  return res.token
+  const res = await adminCall('POST', '/admin/token', { comment })
+  return res
 }
 
-export async function removeToken(token: string) {
-  const res = await AdminCall('DELETE', '/admin/token', { token })
-  return res.token
+export async function removeToken(id: number) {
+  const res = await adminCall('DELETE', '/admin/token', { id })
+  return res
 }
 
 export async function getTokens() {
-  const res = await AdminCall('GET', '/admin/token')
-  return res.token
+  const res = await adminCall('GET', '/admin/token')
+  return res
 }
 
 const userToken = useLocalStorage('userToken', '')
 export const isLoggedIn = computed(() => !!userToken.value)
 
-async function UserCall(method: string, path: string, data?: any) {
+async function userCall(method: string, path: string, data?: any) {
   if (!userToken.value) throw new Error('Not logged in')
-  const res = await fetch(`${BASE}${path}`, {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `${userToken.value}`
-    },
-    body: JSON.stringify(data)
-  })
-  return res.json()
+  return call(userToken.value, method, path, data)
 }
 
 export function userLogin(token: string) {
@@ -71,5 +75,5 @@ export function userAction(
   node: string,
   args: Record<string, any>
 ) {
-  return UserCall('POST', `/private/${action}`, { node, ...args })
+  return userCall('POST', `/private/${action}`, { node, ...args })
 }

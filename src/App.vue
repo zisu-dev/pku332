@@ -52,6 +52,7 @@ import { useI18n } from 'vue-i18n'
 import UserIndicator from '@/components/UserIndicator.vue'
 import TranslateIndicator from './components/TranslateIndicator.vue'
 import GithubIndicator from './components/GithubIndicator.vue'
+import { isAdmin } from './utils/api'
 
 const { t } = useI18n()
 const navItems = [
@@ -64,6 +65,9 @@ const navItems = [
     icon: 'img:https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/pubg.svg'
   }
 ]
+if (isAdmin) {
+  navItems.push({ to: '/admin', label: 'admin', icon: 'mdi-account-wrench' })
+}
 const leftDrawerOpen = ref(false)
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
