@@ -5,6 +5,7 @@ zh-CN: 简体中文
 not-logged-in: 未登录
 user-token: 用户令牌
 login: 登录
+success: 成功
 
 # 主菜单
 home: 主页
@@ -24,3 +25,20 @@ tellme: 告诉我！
 
 goto: 前往
 play now: 立即上号
+
+# Dorm
+please-login: 请登录
+door-control: 寝室门控制
+open-door: 开门
+adjust-clockwise: 顺时针调整
+adjust-counterclockwise: 逆时针调整
+
+# admin
+tokens: 令牌
+admin: 管理
+id: ID
+comment: 备注
+created-at: 创建于
+actions: 操作
+new-token: 新建令牌
+generate: 生成

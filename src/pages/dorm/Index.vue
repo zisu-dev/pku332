@@ -14,7 +14,8 @@
         :btn-props="{
           color: 'primary',
           icon: 'mdi-reload',
-          label: t('adjust-clockwise')
+          label: t('adjust-clockwise'),
+          outline: true
         }"
         :callback="onAdjustCW"
         notify-success
@@ -23,7 +24,8 @@
         :btn-props="{
           color: 'primary',
           icon: 'mdi-restore',
-          label: t('adjust-counterclockwise')
+          label: t('adjust-counterclockwise'),
+          outline: true
         }"
         :callback="onAdjustCC"
         notify-success

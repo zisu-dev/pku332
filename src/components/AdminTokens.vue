@@ -9,7 +9,7 @@
       flat
     >
       <template v-slot:top>
-        <div class="text-subtitle2">Tokens</div>
+        <div class="text-subtitle2">{{ t('tokens') }}</div>
         <q-space />
         <q-btn
           icon="mdi-refresh"
@@ -83,7 +83,7 @@ const columns: any[] = [
     align: 'left'
   },
   { name: 'comment', label: t('comment'), field: 'comment' },
-  { name: 'created_at', label: t('created_at'), field: 'created_at' },
+  { name: 'created_at', label: t('created-at'), field: 'created_at' },
   { name: 'actions', label: t('actions'), field: '' }
 ]
 

@@ -5,6 +5,7 @@ zh-CN: Chinese
 not-logged-in: Not Logged In
 user-token: User Token
 login: Login
+success: Success
 
 # Main nav
 tools: Tools
@@ -24,3 +25,20 @@ tellme: Tell me!
 
 goto: goto
 play now: Play now!
+
+# Dorm
+please-login: Please login
+door-control: Door control
+open-door: Open door
+adjust-clockwise: Adjust clockwise
+adjust-counterclockwise: Adjust counter-clockwise
+
+# Admin
+tokens: Tokens
+admin: Admin
+id: ID
+comment: Comment
+created-at: Created At
+actions: Actions
+new-token: New Token
+generate: Generate
