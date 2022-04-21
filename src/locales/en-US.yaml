@@ -6,6 +6,7 @@ not-logged-in: Not Logged In
 user-token: User Token
 login: Login
 success: Success
+welcome: Welcome
 
 # Main nav
 tools: Tools
@@ -34,6 +35,7 @@ adjust-clockwise: Adjust clockwise
 adjust-counterclockwise: Adjust counter-clockwise
 
 # Admin
+token: Token
 tokens: Tokens
 admin: Admin
 id: ID

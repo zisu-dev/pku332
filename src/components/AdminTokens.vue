@@ -37,7 +37,7 @@
               <template v-if="generated">
                 <q-separator />
                 <q-card-section>
-                  <q-input readonly v-model="generated" label="Comment" />
+                  <q-input readonly v-model="generated" :label="t('token')" />
                   <img :src="qrcode" />
                 </q-card-section>
               </template>

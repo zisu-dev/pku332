@@ -6,6 +6,7 @@ not-logged-in: 未登录
 user-token: 用户令牌
 login: 登录
 success: 成功
+welcome: 欢迎，摆烂人！
 
 # 主菜单
 home: 主页
@@ -34,6 +35,7 @@ adjust-clockwise: 顺时针调整
 adjust-counterclockwise: 逆时针调整
 
 # admin
+token: 令牌
 tokens: 令牌
 admin: 管理
 id: ID
