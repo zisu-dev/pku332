@@ -65,7 +65,7 @@ const navItems = [
     icon: 'img:https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/pubg.svg'
   }
 ]
-if (isAdmin) {
+if (isAdmin.value) {
   navItems.push({ to: '/admin', label: 'admin', icon: 'mdi-account-wrench' })
 }
 const leftDrawerOpen = ref(false)
