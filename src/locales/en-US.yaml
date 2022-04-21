@@ -1,9 +1,15 @@
 # Language selector
 en-US: English (United States)
 zh-CN: Chinese
+
+not-logged-in: Not Logged In
+user-token: User Token
+login: Login
+
 # Main nav
 tools: Tools
 home: Home
+dorm: Dorm
 pubgnote: PUBG note
 
 bailanbox: BaiLan Box

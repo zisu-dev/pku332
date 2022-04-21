@@ -5,26 +5,9 @@
         <q-btn dense flat round icon="mdi-menu" @click="toggleLeftDrawer" />
         <q-toolbar-title style="overflow: visible">PKU332</q-toolbar-title>
         <q-space />
-        <q-select
-          v-model="locale"
-          :options="localeOptions"
-          borderless
-          dark
-          :display-value="t(locale)"
-          emit-value
-        >
-          <template v-slot:prepend>
-            <q-icon name="mdi-translate" />
-          </template>
-        </q-select>
-        <q-btn
-          dense
-          flat
-          round
-          icon="mdi-github"
-          href="https://github.com/zisu-dev/pku332"
-          target="_blank"
-        />
+        <user-indicator />
+        <github-indicator />
+        <translate-indicator />
       </q-toolbar>
     </q-header>
 
@@ -64,16 +47,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from '@vue/reactivity'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import UserIndicator from '@/components/UserIndicator.vue'
+import TranslateIndicator from './components/TranslateIndicator.vue'
+import GithubIndicator from './components/GithubIndicator.vue'
 
-const { t, locale, availableLocales } = useI18n()
-const localeOptions = computed(() =>
-  availableLocales.map((l) => ({ label: t(l), value: l }))
-)
+const { t } = useI18n()
 const navItems = [
   { to: '/', label: 'home', icon: 'mdi-home' },
+  { to: '/dorm', label: 'dorm', icon: 'mdi-view-dashboard' },
   { to: '/tools', label: 'tools', icon: 'mdi-toolbox' },
   {
     to: '/pubgnote',

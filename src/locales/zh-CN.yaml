@@ -1,9 +1,15 @@
 # 语言选择
 en-US: 英语（美国）
 zh-CN: 简体中文
+
+not-logged-in: 未登录
+user-token: 用户令牌
+login: 登录
+
 # 主菜单
 home: 主页
 tools: 实用工具
+dorm: 智能寝室
 pubgnote: 吃鸡笔记
 
 bailanbox: 摆烂百宝箱

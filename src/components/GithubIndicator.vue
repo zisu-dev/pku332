@@ -1,0 +1,10 @@
+<template>
+  <q-btn
+    dense
+    flat
+    round
+    icon="mdi-github"
+    href="https://github.com/zisu-dev/pku332"
+    target="_blank"
+  />
+</template>
