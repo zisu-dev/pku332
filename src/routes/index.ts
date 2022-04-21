@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import tools from '@/routes/tools'
+import dorm from '@/routes/dorm'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -8,11 +9,6 @@ const router = createRouter({
       path: '/',
       name: 'index',
       component: () => import('@/pages/Index.vue')
-    },
-    {
-      path: '/dorm',
-      name: 'dorm',
-      component: () => import('@/pages/Dorm.vue')
     },
     {
       path: '/tools',
@@ -29,6 +25,7 @@ const router = createRouter({
       name: 'admin',
       component: () => import('@/pages/Admin.vue')
     },
+    dorm,
     ...tools
   ]
 })
