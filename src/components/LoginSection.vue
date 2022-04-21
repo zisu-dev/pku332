@@ -1,6 +1,6 @@
 <template>
   <q-card-section>
-    <qr-scan @success="onSuccess" />
+    <qr-scan :callback="onSuccess" />
     <q-input v-model="token" :label="t('user-token')" :rules="rules" />
   </q-card-section>
   <q-card-actions>
@@ -44,6 +44,7 @@ const rules = [
 function onSuccess(text: string) {
   if (text.startsWith('332:')) {
     token.value = text.substring(4)
+    return true
   }
 }
 

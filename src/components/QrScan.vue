@@ -6,8 +6,11 @@
 import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode'
 import { onBeforeUnmount, onMounted } from 'vue'
 
+const props = defineProps<{
+  callback: (text: string) => void | boolean
+}>()
+
 const emits = defineEmits<{
-  (e: 'success', value: string): void
   (e: 'error', value: string): void
 }>()
 
@@ -24,7 +27,11 @@ onMounted(() => {
     false
   )
   scanner.render(
-    (text) => emits('success', text),
+    (text) => {
+      if (props.callback(text)) {
+        scanner.pause()
+      }
+    },
     (err) => emits('error', err)
   )
 })
