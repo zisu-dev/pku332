@@ -26,7 +26,11 @@ const router = createRouter({
       component: () => import('@/pages/Admin.vue')
     },
     dorm,
-    ...tools
+    ...tools,
+    {
+      path: '/:pathMatch(.*)*',
+      component: () => import('@/pages/404.vue')
+    }
   ]
 })
 

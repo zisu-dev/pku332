@@ -50,5 +50,6 @@ id: ID
 comment: 备注
 created-at: 创建于
 actions: 操作
+data: 数据
 new-token: 新建令牌
 generate: 生成

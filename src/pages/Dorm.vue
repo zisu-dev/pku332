@@ -3,10 +3,14 @@
     <div class="row">
       <div class="col-12">
         <q-card>
-          <q-card-section>
-            <div class="text-h6">{{ t('dorm') }}</div>
-          </q-card-section>
-          <q-separator />
+          <q-toolbar class="bg-primary text-white q-pr-none">
+            <q-icon name="mdi-view-dashboard-outline" size="md" />
+            <q-toolbar-title> {{ t('dorm') }} </q-toolbar-title>
+            <q-separator dark vertical />
+            <q-btn stretch flat :label="t('actions')" to="/dorm" />
+            <q-separator dark vertical />
+            <q-btn stretch flat :label="t('data')" to="/dorm/data" />
+          </q-toolbar>
           <q-card-section v-if="isLoggedIn">
             <router-view v-slot="{ Component }">
               <transition name="router" mode="out-in">

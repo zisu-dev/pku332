@@ -50,5 +50,6 @@ id: ID
 comment: Comment
 created-at: Created At
 actions: Actions
+data: Data
 new-token: New Token
 generate: Generate

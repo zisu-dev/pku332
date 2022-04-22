@@ -9,6 +9,11 @@ const route: RouteRecordRaw = {
       path: '',
       name: 'dorm-index',
       component: () => import('@/pages/dorm/Index.vue')
+    },
+    {
+      path: 'data',
+      name: 'dorm-data',
+      component: () => import('@/pages/dorm/Data.vue')
     }
   ]
 }

@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { adminLogin, userLogin, call } from '@/utils/api'
 import { QInput, useQuasar } from 'quasar'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import QrScan from '@/components/QrScan.vue'
 
@@ -74,7 +74,7 @@ async function onUserLogin() {
     $q.notify({ color: 'negative', message: e.message })
   }
   token.value = ''
-  inputRef.value?.resetValidation()
+  nextTick(() => inputRef.value?.resetValidation())
   loginLoading.value = false
 }
 
@@ -95,7 +95,7 @@ async function onAdminLogin() {
         $q.notify({ color: 'negative', message: e.message })
       }
       token.value = ''
-      inputRef.value?.resetValidation()
+      nextTick(() => inputRef.value?.resetValidation())
       adminLoading.value = false
     }
   } else {

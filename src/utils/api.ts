@@ -77,3 +77,7 @@ export function userAction(
 ) {
   return userCall('POST', `/private/${action}`, { node, ...args })
 }
+
+export function userData(scope: string, node: string, type: string) {
+  return userCall('GET', `/private/data/${scope}/${node}/${type}`)
+}
