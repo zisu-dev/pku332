@@ -27,7 +27,7 @@
 import { adminLogin, isAdmin, isLoggedIn, userLogin } from '@/utils/api'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import LoginSection from './LoginSection.vue'
+import LoginSection from '@/components/LoginSection.vue'
 
 const { t } = useI18n()
 const open = ref(false)

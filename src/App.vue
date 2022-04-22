@@ -8,6 +8,14 @@
         <user-indicator />
         <github-indicator />
         <translate-indicator />
+        <q-btn
+          v-if="canInstall && !isStandalone"
+          dense
+          color="primary"
+          unelevated
+          icon="mdi-arrow-down-bold-box"
+          @click="onInstall"
+        />
       </q-toolbar>
     </q-header>
 
@@ -50,9 +58,10 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import UserIndicator from '@/components/UserIndicator.vue'
-import TranslateIndicator from './components/TranslateIndicator.vue'
-import GithubIndicator from './components/GithubIndicator.vue'
-import { isAdmin } from './utils/api'
+import TranslateIndicator from '@/components/TranslateIndicator.vue'
+import GithubIndicator from '@/components/GithubIndicator.vue'
+import { isAdmin } from '@/utils/api'
+import { canInstall, install, isStandalone } from '@/utils/pwa'
 
 const { t } = useI18n()
 const navItems = [
@@ -71,6 +80,10 @@ if (isAdmin.value) {
 const leftDrawerOpen = ref(false)
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+function onInstall() {
+  install()
 }
 </script>
 

@@ -33,7 +33,7 @@ import { adminLogin, userLogin, call } from '@/utils/api'
 import { QInput, useQuasar } from 'quasar'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import QrScan from './QrScan.vue'
+import QrScan from '@/components/QrScan.vue'
 
 const emits = defineEmits<{
   (e: 'login'): void

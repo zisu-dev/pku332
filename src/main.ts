@@ -1,4 +1,5 @@
 import { registerSW } from 'virtual:pwa-register'
+import '@/utils/pwa'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { Quasar, Notify, Dialog } from 'quasar'
