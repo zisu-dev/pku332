@@ -43,6 +43,6 @@ onBeforeUnmount(() => {
 
 <style scoped>
 #qrscan {
-  min-width: 320px;
+  width: min(320px, calc(100vw - 80px));
 }
 </style>

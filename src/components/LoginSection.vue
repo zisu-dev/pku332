@@ -1,7 +1,13 @@
 <template>
   <q-card-section>
     <qr-scan :callback="onSuccess" />
-    <q-input v-model="token" :label="t('user-token')" :rules="rules" />
+    <q-input
+      ref="inputRef"
+      clearable
+      v-model="token"
+      :label="t('user-token')"
+      :rules="rules"
+    />
   </q-card-section>
   <q-card-actions>
     <q-btn
@@ -24,7 +30,7 @@
 
 <script setup lang="ts">
 import { adminLogin, userLogin, call } from '@/utils/api'
-import { useQuasar } from 'quasar'
+import { QInput, useQuasar } from 'quasar'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import QrScan from './QrScan.vue'
@@ -36,6 +42,8 @@ const emits = defineEmits<{
 const $q = useQuasar()
 const { t } = useI18n()
 const token = ref('')
+const inputRef = ref<InstanceType<typeof QInput> | null>(null)
+
 const matchRegex = /^[A-Za-z0-9_-]{21}$/
 const rules = [
   (val: string) => (val.match(matchRegex) ? true : t('invalid-token'))
@@ -52,15 +60,21 @@ const loginLoading = ref(false)
 const adminLoading = ref(false)
 
 async function onUserLogin() {
+  if (!inputRef.value?.validate()) {
+    $q.notify({ color: 'negative', message: t('invalid-token') })
+    return
+  }
   loginLoading.value = true
   try {
     await call(token.value, 'GET', '/private/hello')
     userLogin(token.value)
     emits('login')
+    $q.notify({ color: 'positive', message: t('success') })
   } catch (e: any) {
     $q.notify({ color: 'negative', message: e.message })
   }
   token.value = ''
+  inputRef.value?.resetValidation()
   loginLoading.value = false
 }
 
@@ -68,14 +82,20 @@ let clickCount = 0
 async function onAdminLogin() {
   if (clickCount === 7) {
     if (confirm('Do you really want to login as admin?')) {
+      if (!inputRef.value?.validate()) {
+        $q.notify({ color: 'negative', message: t('invalid-token') })
+        return
+      }
       adminLoading.value = true
       try {
         await call(token.value, 'GET', '/admin/hello')
         adminLogin(token.value)
+        $q.notify({ color: 'positive', message: t('success') })
       } catch (e: any) {
         $q.notify({ color: 'negative', message: e.message })
       }
       token.value = ''
+      inputRef.value?.resetValidation()
       adminLoading.value = false
     }
   } else {
