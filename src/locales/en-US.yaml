@@ -41,6 +41,10 @@ open-door: Open door
 adjust-clockwise: Adjust clockwise
 adjust-counterclockwise: Adjust counter-clockwise
 advanced-settings: Advanced settings
+scope: Scope
+node: Node
+type: Type
+refresh: Refresh
 
 # Admin
 token: Token

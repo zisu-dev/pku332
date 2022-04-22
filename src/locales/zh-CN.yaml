@@ -41,6 +41,10 @@ open-door: 开门
 adjust-clockwise: 顺时针调整
 adjust-counterclockwise: 逆时针调整
 advanced-settings: 高级设置
+scope: 分区
+node: 节点
+type: 类型
+refresh: 刷新
 
 # admin
 token: 令牌
