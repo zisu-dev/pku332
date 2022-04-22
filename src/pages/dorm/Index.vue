@@ -9,27 +9,36 @@
         :btn-props="{ color: 'primary', label: t('open-door') }"
         :callback="onOpenDoor"
         notify-success
+        class="col-grow"
       />
-      <async-btn
-        :btn-props="{
-          color: 'primary',
-          icon: 'mdi-reload',
-          label: t('adjust-clockwise'),
-          outline: true
-        }"
-        :callback="onAdjustCW"
-        notify-success
-      />
-      <async-btn
-        :btn-props="{
-          color: 'primary',
-          icon: 'mdi-restore',
-          label: t('adjust-counterclockwise'),
-          outline: true
-        }"
-        :callback="onAdjustCC"
-        notify-success
-      />
+      <q-btn icon="mdi-cog-sync" :label="t('advanced-settings')" outline>
+        <q-popup-proxy>
+          <q-card>
+            <q-card-actions>
+              <async-btn
+                :btn-props="{
+                  color: 'primary',
+                  icon: 'mdi-reload',
+                  label: t('adjust-clockwise'),
+                  outline: true
+                }"
+                :callback="onAdjustCW"
+                notify-success
+              />
+              <async-btn
+                :btn-props="{
+                  color: 'primary',
+                  icon: 'mdi-restore',
+                  label: t('adjust-counterclockwise'),
+                  outline: true
+                }"
+                :callback="onAdjustCC"
+                notify-success
+              />
+            </q-card-actions>
+          </q-card>
+        </q-popup-proxy>
+      </q-btn>
     </q-card-actions>
   </q-card>
 </template>
@@ -54,15 +63,15 @@ async function onOpenDoor() {
 
 async function onAdjustCW() {
   await userAction('servo_run_sync', 'esp01', {
-    speed: 1600,
-    ms: 500
+    speed: 1400,
+    ms: 100
   })
 }
 
 async function onAdjustCC() {
   await userAction('servo_run_sync', 'esp01', {
-    speed: 1400,
-    ms: 500
+    speed: 1600,
+    ms: 100
   })
 }
 </script>

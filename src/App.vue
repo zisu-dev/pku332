@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import UserIndicator from '@/components/UserIndicator.vue'
 import TranslateIndicator from '@/components/TranslateIndicator.vue'
@@ -64,7 +64,7 @@ import { isAdmin } from '@/utils/api'
 import { canInstall, install, isStandalone } from '@/utils/pwa'
 
 const { t } = useI18n()
-const navItems = [
+const navItems = computed(() => [
   { to: '/', label: 'home', icon: 'mdi-home' },
   { to: '/dorm', label: 'dorm', icon: 'mdi-view-dashboard' },
   { to: '/tools', label: 'tools', icon: 'mdi-toolbox' },
@@ -72,11 +72,11 @@ const navItems = [
     to: '/pubgnote',
     label: 'pubgnote',
     icon: 'img:https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/pubg.svg'
-  }
-]
-if (isAdmin.value) {
-  navItems.push({ to: '/admin', label: 'admin', icon: 'mdi-account-wrench' })
-}
+  },
+  ...(isAdmin.value
+    ? [{ to: '/admin', label: 'admin', icon: 'mdi-account-wrench' }]
+    : [])
+])
 const leftDrawerOpen = ref(false)
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value

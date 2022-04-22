@@ -13,6 +13,7 @@ login: 登录
 success: 成功
 welcome: 欢迎，摆烂人！
 invalid-token: 无效令牌
+logout: 登出
 
 # 主菜单
 home: 主页
@@ -39,6 +40,7 @@ door-control: 寝室门控制
 open-door: 开门
 adjust-clockwise: 顺时针调整
 adjust-counterclockwise: 逆时针调整
+advanced-settings: 高级设置
 
 # admin
 token: 令牌

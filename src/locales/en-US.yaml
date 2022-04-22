@@ -13,6 +13,7 @@ login: Login
 success: Success
 welcome: Welcome
 invalid-token: Invalid Token
+logout: Logout
 
 # Main nav
 tools: Tools
@@ -39,6 +40,7 @@ door-control: Door control
 open-door: Open door
 adjust-clockwise: Adjust clockwise
 adjust-counterclockwise: Adjust counter-clockwise
+advanced-settings: Advanced settings
 
 # Admin
 token: Token
