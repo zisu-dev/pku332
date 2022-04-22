@@ -3,12 +3,13 @@ import { computed } from 'vue'
 
 const BASE = <string>import.meta.env.VITE_API_BASE
 
-export async function call(
-  token: string,
-  method: string,
-  path: string,
-  data?: any
-) {
+class HTTPError extends Error {
+  constructor(public status: number, public message: string) {
+    super(message)
+  }
+}
+
+export async function call(token: string, method: string, path: string, data?: any) {
   const res = await fetch(`${BASE}${path}`, {
     method,
     headers: {
@@ -18,7 +19,7 @@ export async function call(
     body: JSON.stringify(data)
   })
   if (!res.ok) {
-    throw new Error(`${res.status} ${res.statusText}`)
+    throw new HTTPError(res.status, `${res.status} ${res.statusText}`)
   }
   return res.json()
 }
@@ -28,18 +29,23 @@ export const isAdmin = computed(() => !!adminToken.value)
 
 async function adminCall(method: string, path: string, data?: any) {
   if (!adminToken.value) throw new Error('Not logged in')
-  return call(adminToken.value, method, path, data)
+  try {
+    return await call(adminToken.value, method, path, data)
+  } catch (e) {
+    if (e instanceof HTTPError) {
+      if (e.status === 401) {
+        adminLogin('')
+        throw new Error('Not logged in')
+      }
+    }
+  }
 }
 
 export function adminLogin(token: string) {
   adminToken.value = token
 }
 
-export function adminAction(
-  action: string,
-  node: string,
-  args: Record<string, any>
-) {
+export function adminAction(action: string, node: string, args: Record<string, any>) {
   return adminCall('POST', `/admin/${action}`, { node, ...args })
 }
 
@@ -63,18 +69,23 @@ export const isLoggedIn = computed(() => !!userToken.value)
 
 async function userCall(method: string, path: string, data?: any) {
   if (!userToken.value) throw new Error('Not logged in')
-  return call(userToken.value, method, path, data)
+  try {
+    return await call(userToken.value, method, path, data)
+  } catch (e) {
+    if (e instanceof HTTPError) {
+      if (e.status === 401) {
+        userLogin('')
+        throw new Error('Not logged in')
+      }
+    }
+  }
 }
 
 export function userLogin(token: string) {
   userToken.value = token
 }
 
-export function userAction(
-  action: string,
-  node: string,
-  args: Record<string, any>
-) {
+export function userAction(action: string, node: string, args: Record<string, any>) {
   return userCall('POST', `/private/${action}`, { node, ...args })
 }
 

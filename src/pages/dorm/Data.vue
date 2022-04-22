@@ -3,6 +3,8 @@
     <temperature-humidity-section scope="env" node="esp01" type="min" />
     <q-separator />
     <temperature-humidity-section scope="env" node="esp01" type="hour" />
+    <q-separator />
+    <temperature-humidity-section scope="env" node="esp01" type="day" />
   </q-card>
 </template>
 

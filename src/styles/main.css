@@ -1,3 +1,12 @@
 .bg-pku {
   background-color: #94070a;
 }
+
+@font-face {
+  font-family: CascadiaCode;
+  src: url(/fonts/CascadiaCode.woff2);
+}
+
+code {
+  font-family: CascadiaCode;
+}

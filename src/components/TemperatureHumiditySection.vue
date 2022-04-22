@@ -38,14 +38,18 @@ const { t } = useI18n()
 const echartsDivRef = ref<HTMLElement | null>(null)
 const loading = ref(false)
 let chart: echarts.ECharts | null = null
+let data: any[] = []
 
 async function onRefresh() {
   loading.value = true
-  const data = <any[]>await userData(props.scope, props.node, props.type)
-  const tData = data.map(({ value: { t, c }, created }) => [created, t, c])
-  const hData = data.map(({ value: { h, c }, created }) => [created, h, c])
+  data = <any[]>await userData(props.scope, props.node, props.type)
   chart?.setOption({
-    series: [{ data: tData }, { data: hData }]
+    series: [
+      { data: data.map(({ value: { tavg, c }, created }, i) => [created, tavg, c, i]) },
+      { data: data.map(({ value: { havg, c }, created }, i) => [created, havg, c, i]) },
+      { data: data.map(({ value: { tavg, tmin, tmax, c }, created }, i) => [created, tavg, c, i, tmin, tmax, tavg, tavg]) },
+      { data: data.map(({ value: { havg, hmin, hmax, c }, created }, i) => [created, havg, c, i, hmin, hmax, havg, havg]) }
+    ]
   })
   loading.value = false
 }
@@ -81,23 +85,26 @@ onMounted(async () => {
     },
     tooltip: {
       trigger: 'axis',
+      textStyle: {
+        fontFamily: 'CascadiaCode',
+        fontSize: 12,
+        align: 'left'
+      },
       formatter: ([
         {
           axisValueLabel,
           marker: marker0,
-          seriesName: seriesName0,
-          value: [, value0, samples]
-        },
-        {
-          marker: marker1,
-          seriesName: seriesName1,
-          value: [, value1]
+          value: [, value0, samples, i]
         }
       ]: any[]) =>
         `${axisValueLabel}<br/>
         Samples: ${samples}<br/>
-        ${marker0}${seriesName0}: ${value0.toFixed(1)} °C<br/>
-        ${marker1}${seriesName1}: ${value1.toFixed(1)} %`
+        Tavg: ${data[i].value.tavg.toFixed(1)} °C<br/>
+        Tmin: ${data[i].value.tmin.toFixed(1)} °C<br/>
+        Tmax: ${data[i].value.tmax.toFixed(1)} °C<br/>
+        Havg: ${data[i].value.havg.toFixed(1)} %<br/>
+        Hmin: ${data[i].value.hmin.toFixed(1)} %<br/>
+        Hmax: ${data[i].value.hmax.toFixed(1)} %`
     },
     xAxis: {
       type: 'time',
@@ -158,6 +165,26 @@ onMounted(async () => {
           label: {
             formatter: ({ value }: { value: number }) => hum(value)
           }
+        }
+      },
+      {
+        name: 'Temperature Boxplot',
+        data: [],
+        type: 'boxplot',
+        yAxisIndex: 0,
+        encode: {
+          x: 0,
+          y: [4, 6, 1, 7, 5]
+        }
+      },
+      {
+        name: 'Humidity Boxplot',
+        data: [],
+        type: 'boxplot',
+        yAxisIndex: 1,
+        encode: {
+          x: 0,
+          y: [4, 6, 1, 7, 5]
         }
       }
     ]
