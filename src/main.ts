@@ -1,3 +1,4 @@
+import { registerSW } from 'virtual:pwa-register'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { Quasar, Notify, Dialog } from 'quasar'
@@ -9,6 +10,30 @@ import App from '@/App.vue'
 import router from '@/routes'
 import i18n from '@/plugins/i18n'
 import '@/styles/main.css'
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    Notify.create({
+      color: 'primary',
+      message: i18n.global.t('new-content-available'),
+      actions: [
+        {
+          label: i18n.global.t('reload'),
+          color: 'white',
+          handler: () => updateSW()
+        },
+        { label: i18n.global.t('dismiss'), color: 'white' }
+      ]
+    })
+  },
+  onOfflineReady() {
+    Notify.create({
+      color: 'primary',
+      message: i18n.global.t('offline-ready'),
+      actions: [{ label: i18n.global.t('dismiss'), color: 'white' }]
+    })
+  }
+})
 
 const app = createApp(App)
 

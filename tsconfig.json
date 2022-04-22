@@ -10,10 +10,12 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": [
-      "esnext",
-      "dom"
+      "ESNext",
+      "DOM",
+      "WebWorker"
     ],
     "types": [
+      "vite-plugin-pwa/client",
       "@intlify/vite-plugin-vue-i18n/client"
     ],
     "baseUrl": ".",
