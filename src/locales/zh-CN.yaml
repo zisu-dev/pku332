@@ -2,6 +2,11 @@
 en-US: 英语（美国）
 zh-CN: 简体中文
 
+new-content-available: 有更新可用
+offline-ready: APP已可离线使用
+reload: 刷新
+dismiss: 忽略
+
 not-logged-in: 未登录
 user-token: 用户令牌
 login: 登录

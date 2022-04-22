@@ -2,6 +2,11 @@
 en-US: English (United States)
 zh-CN: Chinese
 
+new-content-available: New content available
+offline-ready: Offline ready
+reload: Reload
+dismiss: Dismiss
+
 not-logged-in: Not Logged In
 user-token: User Token
 login: Login
