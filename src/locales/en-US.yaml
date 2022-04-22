@@ -7,6 +7,7 @@ user-token: User Token
 login: Login
 success: Success
 welcome: Welcome
+invalid-token: Invalid Token
 
 # Main nav
 tools: Tools
