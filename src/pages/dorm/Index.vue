@@ -46,10 +46,13 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import AsyncBtn from '@/components/AsyncBtn.vue'
-import { wait } from '@/utils/async'
 import { userAction } from '@/utils/api'
+import { onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
 
 async function onOpenDoor() {
   await userAction('servo_run_seq', 'esp01', {
@@ -74,4 +77,13 @@ async function onAdjustCC() {
     ms: 100
   })
 }
+
+onMounted(() => {
+  const { action, ...query } = route.query
+  if (action === 'open_door') {
+    onOpenDoor().then(() => {
+      router.replace({ query })
+    })
+  }
+})
 </script>

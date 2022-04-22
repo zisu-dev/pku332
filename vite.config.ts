@@ -30,20 +30,37 @@ export default defineConfig({
         theme_color: '#94070a',
         icons: [
           {
-            src: 'android-chrome-192x192.png',
+            src: 'icons/android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'android-chrome-512x512.png',
+            src: 'icons/maskable-icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable'
+          },
+          {
+            src: 'icons/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           },
           {
-            src: 'android-chrome-512x512.png',
+            src: 'icons/maskable-icon-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable'
+            purpose: 'maskable'
+          }
+        ],
+        shortcuts: [
+          {
+            name: 'Open Door',
+            short_name: 'Open Door',
+            description: 'Open the room door',
+            url: '/dorm?action=open_door',
+            icons: [
+              { src: 'icons/open-door-icon-192x192.png', sizes: '192x192' }
+            ]
           }
         ]
       }
