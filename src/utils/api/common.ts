@@ -2,7 +2,7 @@ import { ref } from 'vue'
 
 export const API_BASE = <string>import.meta.env.VITE_API_BASE
 export const API_FALLBACK = <string>import.meta.env.VITE_API_FALLBACK
-export const forceFallback = ref(false)
+export const useFallback = ref(false)
 
 export class HTTPError extends Error {
   constructor(public status: number, public message: string) {
@@ -12,8 +12,10 @@ export class HTTPError extends Error {
 
 export async function call(token: string, method: string, path: string, data?: any) {
   let res: Response
-  const dispatch = (base: string) =>
-    fetch(`${base}${path}`, {
+  const dispatch = async (base: string, timeout: number) => {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), timeout)
+    const res = await fetch(`${base}${path}`, {
       method,
       headers: {
         'Content-Type': 'application/json',
@@ -21,15 +23,18 @@ export async function call(token: string, method: string, path: string, data?: a
       },
       body: JSON.stringify(data)
     })
-  if (forceFallback.value) {
-    res = await dispatch(API_FALLBACK)
+    clearTimeout(timeoutId)
+    return res
+  }
+  if (useFallback.value) {
+    res = await dispatch(API_FALLBACK, 5000)
   } else {
     try {
-      res = await dispatch(API_BASE)
+      res = await dispatch(API_BASE, 500)
     } catch (e) {
       console.log(e)
-      res = await dispatch(API_FALLBACK)
-      forceFallback.value = true
+      res = await dispatch(API_FALLBACK, 5000)
+      useFallback.value = true
     }
   }
   if (!res.ok) {
@@ -43,7 +48,7 @@ export async function call(token: string, method: string, path: string, data?: a
 }
 
 async function checkAPI() {
-  if (forceFallback.value) {
+  if (useFallback.value) {
     try {
       await fetch(`${API_BASE}/hello`, { method: 'POST' })
     } catch (e) {
