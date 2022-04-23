@@ -11,13 +11,21 @@
         <!--  -->
         {{ t('type') }}: <code>{{ type }}</code>
       </div>
-      <q-btn outline :label="t('refresh')" @click="onRefresh" />
+      <q-btn
+        :outline="!auto"
+        :unelevated="auto"
+        :color="auto ? 'positive' : 'primary'"
+        :label="t(auto ? 'refreshing' : 'refresh')"
+        @click="onRefresh"
+        :loading="btnLoading"
+        v-touch-hold.mouse="onHold"
+      />
     </div>
     <q-separator />
     <div class="echarts-wrapper">
       <div class="echarts" ref="echartsDivRef"></div>
     </div>
-    <q-inner-loading :showing="loading" />
+    <q-inner-loading :showing="overLoading" />
   </q-card-section>
 </template>
 
@@ -36,11 +44,16 @@ const props = defineProps<{
 const { t } = useI18n()
 
 const echartsDivRef = ref<HTMLElement | null>(null)
-const loading = ref(false)
+const auto = ref(false)
+const overLoading = ref(false)
+const btnLoading = ref(false)
+
 let chart: echarts.ECharts | null = null
 let data: any[] = []
 
-async function onRefresh() {
+const refresh = async () => {
+  const loading = auto.value ? btnLoading : overLoading
+
   loading.value = true
   data = <any[]>await userData(props.scope, props.node, props.type)
   chart?.setOption({
@@ -52,6 +65,23 @@ async function onRefresh() {
     ]
   })
   loading.value = false
+}
+
+const onRefresh = () => {
+  if (auto.value) return
+  refresh()
+}
+
+let shouldStop = false
+const autoRefresh = async () => {
+  if (shouldStop) return
+  if (auto.value) await refresh()
+  setTimeout(autoRefresh, 5000)
+}
+autoRefresh()
+
+const onHold = () => {
+  auto.value = !auto.value
 }
 
 const tem = (value: number) => `${value.toFixed(1)} °C`
@@ -189,10 +219,12 @@ onMounted(async () => {
       }
     ]
   })
-  onRefresh()
+
+  refresh()
 })
 
 onBeforeUnmount(() => {
+  shouldStop = true
   chart?.dispose()
 })
 </script>

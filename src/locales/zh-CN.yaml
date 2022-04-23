@@ -51,6 +51,7 @@ scope: 分区
 node: 节点
 type: 类型
 refresh: 刷新
+refreshing: 刷新中
 
 # admin
 token: 令牌

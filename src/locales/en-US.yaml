@@ -51,6 +51,7 @@ scope: Scope
 node: Node
 type: Type
 refresh: Refresh
+refreshing: Refreshing
 
 # Admin
 token: Token
