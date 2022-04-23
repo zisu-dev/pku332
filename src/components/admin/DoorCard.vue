@@ -7,6 +7,8 @@
     <q-card-section class="row q-gutter-sm items-center">
       <q-btn outline label="Add Stage" @click="stages.push({ speed: 1500, ms: 100 })" />
       <q-btn outline label="Remove Stage" @click="stages.pop()" />
+      <async-btn ref="fetchBtnRef" :btn-props="{ outline: true, label: 'Fetch' }" :callback="loadArgs" notify-success />
+      <async-btn :btn-props="{ outline: true, label: 'Save' }" :callback="saveArgs" notify-success />
     </q-card-section>
     <q-card-section class="row">
       <div v-for="(stage, i) of stages" class="q-pa-xs">
@@ -34,21 +36,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { userAction } from '@/utils/api'
+import { adminCall, userAction } from '@/utils/api'
 import AsyncBtn from '@/components/AsyncBtn.vue'
 
 const { t } = useI18n()
-const stages = ref<{ speed: number; ms: number }[]>([
-  { speed: 1700, ms: 3000 },
-  { speed: 1500, ms: 2000 },
-  { speed: 1300, ms: 2950 }
-])
+const stages = ref<{ speed: number; ms: number }[]>([])
+
+const fetchBtnRef = ref<InstanceType<typeof AsyncBtn> | null>(null)
+
+const loadArgs = async () => {
+  stages.value = await adminCall('GET', '/open_door_args')
+}
+
+const saveArgs = async () => {
+  await adminCall('POST', '/open_door_args', { args: stages.value })
+}
 
 const dispatch = async () => {
   await userAction('servo_run_seq', 'esp01', {
     stages: stages.value
   })
 }
+
+onMounted(() => {
+  fetchBtnRef.value?.dispatch()
+})
 </script>

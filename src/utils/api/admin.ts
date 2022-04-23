@@ -5,7 +5,7 @@ import { call, HTTPError } from './common'
 const adminToken = useLocalStorage('adminToken', '')
 export const isAdmin = computed(() => !!adminToken.value)
 
-async function adminCall(method: string, path: string, data?: any) {
+export async function adminCall(method: string, path: string, data?: any) {
   if (!adminToken.value) throw new Error('Not logged in')
   try {
     return await call(adminToken.value, method, '/admin' + path, data)

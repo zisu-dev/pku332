@@ -5,7 +5,7 @@ import { call, HTTPError } from './common'
 const userToken = useLocalStorage('userToken', '')
 export const isLoggedIn = computed(() => !!userToken.value)
 
-async function userCall(method: string, path: string, data?: any) {
+export async function userCall(method: string, path: string, data?: any) {
   if (!userToken.value) throw new Error('Not logged in')
   try {
     return await call(userToken.value, method, '/private' + path, data)

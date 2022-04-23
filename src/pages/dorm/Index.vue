@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import AsyncBtn from '@/components/AsyncBtn.vue'
-import { userAction } from '@/utils/api'
+import { userAction, userCall } from '@/utils/api'
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -58,13 +58,7 @@ const router = useRouter()
 const openDoorRef = ref<InstanceType<typeof AsyncBtn> | null>(null)
 
 async function onOpenDoor() {
-  await userAction('servo_run_seq', 'esp01', {
-    stages: [
-      { speed: 1700, ms: 3000 },
-      { speed: 1500, ms: 2000 },
-      { speed: 1300, ms: 2950 }
-    ]
-  })
+  await userCall('POST', '/open_door', { node: 'esp01' })
 }
 
 async function onAdjustCW() {

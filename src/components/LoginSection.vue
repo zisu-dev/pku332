@@ -1,30 +1,13 @@
 <template>
   <q-card-section>
     <qr-scan :callback="onSuccess" />
-    <q-input
-      ref="inputRef"
-      clearable
-      v-model="token"
-      :label="t('user-token')"
-      :rules="rules"
-    />
+    <q-input ref="inputRef" clearable v-model="token" :label="t('user-token')" :rules="rules" />
   </q-card-section>
   <q-card-actions>
-    <q-btn
-      color="primary"
-      class="col-grow"
-      @click="onUserLogin"
-      :loading="loginLoading"
-    >
+    <q-btn color="primary" class="col-grow" @click="onUserLogin" :loading="loginLoading">
       {{ t('login') }}
     </q-btn>
-    <q-btn
-      flat
-      class="col-auto"
-      icon="mdi-application-cog-outline"
-      @click="onAdminLogin"
-      :loading="adminLoading"
-    />
+    <q-btn flat class="col-auto" icon="mdi-application-cog-outline" @click="onAdminLogin" :loading="adminLoading" />
   </q-card-actions>
 </template>
 
@@ -45,14 +28,11 @@ const token = ref('')
 const inputRef = ref<InstanceType<typeof QInput> | null>(null)
 
 const matchRegex = /^[A-Za-z0-9_-]{21}$/
-const rules = [
-  (val: string) => (val.match(matchRegex) ? true : t('invalid-token'))
-]
+const rules = [(val: string) => (val.match(matchRegex) ? true : t('invalid-token'))]
 
 function onSuccess(text: string) {
   if (text.startsWith('332:')) {
     token.value = text.substring(4)
-    return true
   }
 }
 
