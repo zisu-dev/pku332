@@ -51,6 +51,7 @@ async function checkAPI() {
   if (useFallback.value) {
     try {
       await fetch(`${API_BASE}/hello`, { method: 'POST' })
+      useFallback.value = false
     } catch (e) {
       console.log(e)
     }
