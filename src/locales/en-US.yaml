@@ -20,6 +20,12 @@ tools: Tools
 home: Home
 dorm: Dorm
 pubgnote: PUBG note
+temperature: Temperature
+humidity: Humidity
+realtime-info: Realtime info
+loading: Loading
+updated-time: Update time
+quick-actions: Quick actions
 
 bailanbox: BaiLan Box
 pubg: PUBG

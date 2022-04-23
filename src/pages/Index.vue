@@ -1,7 +1,13 @@
 <template>
   <q-page padding>
-    <div class="row">
-      <div class="col-12">
+    <div class="row justify-center">
+      <div class="col-12 col-md-6 col-lg-4 q-pa-sm">
+        <realtime-info-card />
+      </div>
+      <div v-if="isLoggedIn" class="col-12 col-md-6 col-lg-4 q-pa-sm">
+        <quick-action-card />
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 q-pa-sm">
         <q-card>
           <q-card-section>
             <div class="text-h1 text-center">🦜</div>
@@ -22,9 +28,7 @@
             <p>But it is the future.</p>
             <p>The past has no power to stop</p>
             <p>The future is promised.</p>
-            <p>
-              It is not the past, it is the future that we must prepare for.
-            </p>
+            <p>It is not the past, it is the future that we must prepare for.</p>
             <p>We must act now, not wait for the future.</p>
             <p>We must act now, not wait for the future.</p>
           </q-card-section>
@@ -33,3 +37,9 @@
     </div>
   </q-page>
 </template>
+
+<script setup lang="ts">
+import RealtimeInfoCard from '@/components/RealtimeInfoCard.vue'
+import QuickActionCard from '@/components/QuickActionCard.vue'
+import { isLoggedIn } from '@/utils/api'
+</script>

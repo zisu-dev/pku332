@@ -8,6 +8,7 @@
       <async-btn
         :btn-props="{ color: 'primary', label: t('open-door') }"
         :callback="onOpenDoor"
+        ref="openDoorRef"
         notify-success
         class="col-grow"
       />
@@ -47,12 +48,14 @@
 import { useI18n } from 'vue-i18n'
 import AsyncBtn from '@/components/AsyncBtn.vue'
 import { userAction } from '@/utils/api'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
+
+const openDoorRef = ref<InstanceType<typeof AsyncBtn> | null>(null)
 
 async function onOpenDoor() {
   await userAction('servo_run_seq', 'esp01', {
@@ -81,7 +84,7 @@ async function onAdjustCC() {
 onMounted(() => {
   const { action, ...query } = route.query
   if (action === 'open_door') {
-    onOpenDoor().then(() => {
+    openDoorRef.value?.dispatch().then(() => {
       router.replace({ query })
     })
   }

@@ -1,5 +1,5 @@
 <template>
-  <q-btn v-bind="{ ...(props.btnProps ?? {}), loading }" @click="onClick" />
+  <q-btn v-bind="{ ...(props.btnProps ?? {}), loading }" @click="dispatch" />
 </template>
 
 <script setup lang="ts">
@@ -18,7 +18,7 @@ const $q = useQuasar()
 const { t } = useI18n()
 
 const loading = ref(false)
-async function onClick() {
+async function dispatch() {
   loading.value = true
   try {
     const ret = await props.callback()
@@ -35,4 +35,6 @@ async function onClick() {
   }
   loading.value = false
 }
+
+defineExpose({ dispatch })
 </script>
