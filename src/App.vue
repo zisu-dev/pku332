@@ -36,7 +36,7 @@
     <q-footer elevated class="bg-grey-8 text-white">
       <div class="row justify-center">
         <div>
-          <code>&copy;thezzisu {{ GIT_HASH }} {{ useFallback ? 'L' : 'F' }}</code>
+          <code>&copy;thezzisu {{ GIT_HASH }} {{ useFallback ? 'F' : 'L' }}</code>
         </div>
       </div>
     </q-footer>
