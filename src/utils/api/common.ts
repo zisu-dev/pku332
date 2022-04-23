@@ -21,7 +21,8 @@ export async function call(token: string, method: string, path: string, data?: a
         'Content-Type': 'application/json',
         Authorization: token
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      signal: controller.signal
     })
     clearTimeout(timeoutId)
     return res
