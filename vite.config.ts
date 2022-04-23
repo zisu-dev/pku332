@@ -1,9 +1,12 @@
 import { resolve } from 'path'
+import { execSync } from 'child_process'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
 import { VitePWA } from 'vite-plugin-pwa'
+
+process.env.VITE_GIT_HASH = execSync('git rev-parse --short HEAD').toString().trim()
 
 export default defineConfig({
   plugins: [
@@ -58,9 +61,7 @@ export default defineConfig({
             short_name: 'Open Door',
             description: 'Open the room door',
             url: '/dorm?action=open_door',
-            icons: [
-              { src: 'icons/open-door-icon-192x192.png', sizes: '192x192' }
-            ]
+            icons: [{ src: 'icons/open-door-icon-192x192.png', sizes: '192x192' }]
           }
         ]
       }

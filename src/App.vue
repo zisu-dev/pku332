@@ -8,26 +8,13 @@
         <user-indicator />
         <github-indicator />
         <translate-indicator />
-        <q-btn
-          v-if="canInstall && !isStandalone"
-          dense
-          color="primary"
-          unelevated
-          icon="mdi-arrow-down-bold-box"
-          @click="onInstall"
-        />
+        <q-btn v-if="canInstall && !isStandalone" dense color="primary" unelevated icon="mdi-arrow-down-bold-box" @click="onInstall" />
       </q-toolbar>
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" side="left" show-if-above bordered>
       <q-list>
-        <q-item
-          clickable
-          v-ripple
-          v-for="(item, i) in navItems"
-          :key="i"
-          :to="item.to"
-        >
+        <q-item clickable v-ripple v-for="(item, i) in navItems" :key="i" :to="item.to">
           <q-item-section avatar>
             <q-icon :name="item.icon" />
           </q-item-section>
@@ -48,7 +35,9 @@
 
     <q-footer elevated class="bg-grey-8 text-white">
       <div class="row justify-center">
-        <div>&copy; thezzisu 2022</div>
+        <div>
+          <code>&copy; thezzisu 2022 {{ GIT_HASH }}</code>
+        </div>
       </div>
     </q-footer>
   </q-layout>
@@ -73,9 +62,7 @@ const navItems = computed(() => [
     label: 'pubgnote',
     icon: 'img:https://cdn.jsdelivr.net/npm/simple-icons@v6/icons/pubg.svg'
   },
-  ...(isAdmin.value
-    ? [{ to: '/admin', label: 'admin', icon: 'mdi-account-wrench' }]
-    : [])
+  ...(isAdmin.value ? [{ to: '/admin', label: 'admin', icon: 'mdi-account-wrench' }] : [])
 ])
 const leftDrawerOpen = ref(false)
 function toggleLeftDrawer() {
@@ -85,6 +72,8 @@ function toggleLeftDrawer() {
 function onInstall() {
   install()
 }
+
+const GIT_HASH = import.meta.env.VITE_GIT_HASH
 </script>
 
 <style>
