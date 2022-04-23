@@ -36,7 +36,7 @@
     <q-footer elevated class="bg-grey-8 text-white">
       <div class="row justify-center">
         <div>
-          <code>&copy; thezzisu 2022 {{ GIT_HASH }}</code>
+          <code>&copy;thezzisu {{ GIT_HASH }} {{ useFallback ? 'L' : 'F' }}</code>
         </div>
       </div>
     </q-footer>
@@ -49,7 +49,7 @@ import { useI18n } from 'vue-i18n'
 import UserIndicator from '@/components/UserIndicator.vue'
 import TranslateIndicator from '@/components/TranslateIndicator.vue'
 import GithubIndicator from '@/components/GithubIndicator.vue'
-import { isAdmin } from '@/utils/api'
+import { isAdmin, useFallback } from '@/utils/api'
 import { canInstall, install, isStandalone } from '@/utils/pwa'
 
 const { t } = useI18n()
