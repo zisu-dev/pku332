@@ -62,7 +62,7 @@ async function onOpenDoor() {
     stages: [
       { speed: 1700, ms: 3000 },
       { speed: 1500, ms: 2000 },
-      { speed: 1300, ms: 3000 }
+      { speed: 1300, ms: 2950 }
     ]
   })
 }
