@@ -46,6 +46,10 @@ const tools = [
   {
     name: 'wheretoeat',
     icon: '🤤'
+  },
+  {
+    name: 'portal',
+    icon: '🧐'
   }
 ]
 </script>
