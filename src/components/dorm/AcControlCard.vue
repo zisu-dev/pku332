@@ -20,11 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import AsyncBtn from '@/components/AsyncBtn.vue'
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useQuasar } from 'quasar'
+import AsyncBtn from '@/components/AsyncBtn.vue'
+import { userCall } from '@/utils/api'
 
 const { t } = useI18n()
 const $q = useQuasar()
@@ -34,7 +35,7 @@ const router = useRouter()
 const openAcRef = ref<InstanceType<typeof AsyncBtn> | null>(null)
 
 async function onOpenAc() {
-  throw new Error('Not implemented')
+  await userCall('POST', '/ac_send', { id: 0 })
 }
 
 onMounted(() => {
