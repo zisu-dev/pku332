@@ -6,40 +6,50 @@
     <q-separator inset />
     <q-card-actions>
       <async-btn
-        :btn-props="{ color: 'primary', label: t('open-door') }"
-        :callback="onOpenDoor"
-        ref="openDoorRef"
+        :btn-props="{
+          color: 'primary',
+          icon: 'mdi-restore',
+          label: t('adjust-counterclockwise'),
+          outline: true
+        }"
+        :callback="onAdjustCC"
+        :hold-callback="onAdjustCCH"
         notify-success
         class="col-grow"
       />
-      <q-btn icon="mdi-cog-sync" :label="t('advanced-settings')" outline>
-        <q-popup-proxy>
-          <q-card>
-            <q-card-actions>
-              <async-btn
-                :btn-props="{
-                  color: 'primary',
-                  icon: 'mdi-reload',
-                  label: t('adjust-clockwise'),
-                  outline: true
-                }"
-                :callback="onAdjustCW"
-                notify-success
-              />
-              <async-btn
-                :btn-props="{
-                  color: 'primary',
-                  icon: 'mdi-restore',
-                  label: t('adjust-counterclockwise'),
-                  outline: true
-                }"
-                :callback="onAdjustCC"
-                notify-success
-              />
-            </q-card-actions>
-          </q-card>
-        </q-popup-proxy>
-      </q-btn>
+      <async-btn
+        :btn-props="{
+          color: 'primary',
+          icon: 'mdi-restore',
+          label: t('open-door')
+        }"
+        :callback="onOpenDoor"
+        notify-success
+        class="col-grow"
+        ref="openDoorRef"
+      />
+      <async-btn
+        :btn-props="{
+          color: 'primary',
+          icon: 'mdi-reload',
+          label: t('close-door')
+        }"
+        :callback="onCloseDoor"
+        notify-success
+        class="col-grow"
+      />
+      <async-btn
+        :btn-props="{
+          color: 'primary',
+          icon: 'mdi-reload',
+          label: t('adjust-clockwise'),
+          outline: true
+        }"
+        :callback="onAdjustCW"
+        :hold-callback="onAdjustCWH"
+        notify-success
+        class="col-grow"
+      />
     </q-card-actions>
   </q-card>
 </template>
@@ -61,6 +71,10 @@ async function onOpenDoor() {
   await userCall('POST', '/open_door', { node: 'esp01' })
 }
 
+async function onCloseDoor() {
+  await userCall('POST', '/close_door', { node: 'esp01' })
+}
+
 async function onAdjustCW() {
   await userAction('servo_run_sync', 'esp01', {
     speed: 1400,
@@ -68,10 +82,24 @@ async function onAdjustCW() {
   })
 }
 
+async function onAdjustCWH() {
+  await userAction('servo_run_sync', 'esp01', {
+    speed: 1000,
+    ms: 200
+  })
+}
+
 async function onAdjustCC() {
   await userAction('servo_run_sync', 'esp01', {
     speed: 1600,
     ms: 100
+  })
+}
+
+async function onAdjustCCH() {
+  await userAction('servo_run_sync', 'esp01', {
+    speed: 2000,
+    ms: 200
   })
 }
 
