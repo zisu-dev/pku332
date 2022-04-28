@@ -7,13 +7,16 @@ import { QBtnProps, useQuasar } from 'quasar'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 
-const props = defineProps<{
-  callback: () => Promise<void | string>
-  holdCallback?: () => Promise<void | string>
-  btnProps?: QBtnProps
-  notifySuccess?: boolean
-  notifyError?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    callback: () => Promise<void | string>
+    holdCallback?: () => Promise<void | string>
+    btnProps?: QBtnProps
+    notifySuccess?: boolean
+    notifyError?: boolean
+  }>(),
+  { notifyError: true }
+)
 
 const $q = useQuasar()
 const { t } = useI18n()

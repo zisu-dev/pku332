@@ -54,6 +54,8 @@ node: Node
 type: Type
 refresh: Refresh
 refreshing: Refreshing
+ac-control: AC Control
+open-ac: Open AC
 
 # Admin
 token: Token

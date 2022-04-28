@@ -54,6 +54,8 @@ node: 节点
 type: 类型
 refresh: 刷新
 refreshing: 刷新中
+ac-control: 空调控制
+open-ac: 打开空调
 
 # admin
 token: 令牌
